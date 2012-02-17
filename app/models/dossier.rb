@@ -10,4 +10,7 @@ class Dossier
 
   ## Mass assignment protection
   attr_accessible :code
+
+  ## relations
+  belongs_to :departement
 end

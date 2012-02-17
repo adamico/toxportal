@@ -8,5 +8,13 @@
 puts 'EMPTY THE MONGODB DATABASE'
 Mongoid.master.collections.reject { |c| c.name =~ /^system/}.each(&:drop)
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'First User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
+user = User.find_or_create_by(name: 'First User', email: 'user@example.com', password: 'please', password_confirmation: 'please', role: "transmitter")
 puts 'New user created: ' << user.name
+
+require 'csv'
+
+puts "creating departements"
+CSV.foreach("csv/departements.csv", headers: true) do |row|
+  dep = Departement.find_or_create_by(name: row['name'], code_postal: row['cp'])
+  puts "new departement created : " << dep.name
+end

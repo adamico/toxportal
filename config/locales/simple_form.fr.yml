@@ -18,6 +18,7 @@ fr:
       name: "Nom"
       dossier:
         code: "Identification"
+        departement_id: "Département"
     # Labels and hints examples
     # labels:
     #   password: 'Password'
