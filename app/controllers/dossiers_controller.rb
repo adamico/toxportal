@@ -2,7 +2,7 @@ class DossiersController < ApplicationController
   helper_method :date_deces
 
   def index
-    @dossiers = Dossier.all
+    @dossiers = DossierDecorator.decorate(Dossier.all)
   end
 
   def new
