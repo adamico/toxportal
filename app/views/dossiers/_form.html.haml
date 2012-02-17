@@ -1,0 +1,7 @@
+= simple_form_for dossier, :html => {class: 'form-horizontal'} do |f|
+  = f.error_notification if f.error_notification
+
+  = f.input :code
+  .actions
+    = f.button :submit, class: "btn-success", disable_with: "Enregistrer"
+    = link_to "Revenir à la liste", dossiers_path, class: 'btn btn-danger'
