@@ -1,5 +1,4 @@
 - if user_signed_in?
-  %li= link_to t("devise.registrations.edit", resourcename: "profile"), edit_user_registration_path(current_user)
   %li= link_to t("devise.shared.sign_out"), destroy_user_session_path, :method=>'delete'
 - else
   %li= link_to t("devise.shared.sign_in"), new_user_session_path
