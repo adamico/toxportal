@@ -7,6 +7,7 @@
       = f.text_field :code
       = f.label :departement_id
       = f.collection_select :departement_id, Departement.all, :id, :cp_name
+  = f.input :date_deces, input_html: {class: "dateITA", "data-value" => date_deces}
 
   .actions
     = f.button :submit, class: "btn-success", disable_with: "Enregistrer"

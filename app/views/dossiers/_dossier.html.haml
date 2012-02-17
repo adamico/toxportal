@@ -1,2 +1,5 @@
 %tr
   %td= dossier.code
+  %td= dossier.date_deces
+  %td= dossier.departement.cp_name
+  %td= link_to "Modifier", edit_dossier_path(dossier)
