@@ -1,12 +1,3 @@
 - title "Listing dossiers"
 
-- if @dossiers.any?
-  %table.table.table-condensed.table-striped
-    %tr
-      %th Identification
-      %th Date décès
-      %th Département
-      %th
-    = render @dossiers
-- else
-  Aucun dossier
+= render 'dossiers', dossiers: @dossiers

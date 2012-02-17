@@ -1,0 +1,13 @@
+- if dossiers.any?
+  %table.table.table-condensed.table-striped
+    %thead
+      %tr
+        %th.ui-state-default Identification
+        %th.ui-state-default Date décès
+        %th.ui-state-default Département
+        %th.ui-state-default
+    %tbody#dossiers
+      = render dossiers
+
+- else
+  Aucun dossier
