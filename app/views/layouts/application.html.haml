@@ -20,7 +20,11 @@
       .navbar-inner
         .container
           = link_to "ToxPortal", root_path, class: "brand"
-          %ul.nav.pull-right= render 'shared/navigation'
+          - if user_signed_in?
+            %ul.nav
+              %li= link_to "Saisie", new_dossier_path
+            %ul.nav.pull-right
+              %li= link_to t("devise.shared.sign_out"), destroy_user_session_path, :method=>'delete'
     .container
       .content
         .page-header
