@@ -5,12 +5,13 @@ def valid_user
     :password => "please", :password_confirmation => "please"}
 end
 
-def sign_up user
+def sign_up user, role
   Factory(:user,
     name: user[:name],
     email: user[:email],
     password: user[:password],
-    password_confirmation: user[:password_confirmation]
+    password_confirmation: user[:password_confirmation],
+    role: role
   )
 end
 
@@ -26,12 +27,13 @@ Given /^I am not logged in$/ do
   visit '/users/sign_out'
 end
 
-Given /^I am logged in$/ do
-  sign_up valid_user
+Given /^I am logged in as (\w+)$/ do |role|
+  sign_up valid_user, role
+  sign_in valid_user
 end
 
-Given /^I exist as a user$/ do
-  sign_up valid_user
+Given /^I exist as a user with (\w+) role$/ do |role|
+  sign_up valid_user, role
   visit '/users/sign_out'
 end
 

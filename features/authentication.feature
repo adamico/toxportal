@@ -10,14 +10,14 @@ Feature: Authentication
       And I should be signed out
 
   Scenario: User enters wrong password
-    Given I exist as a user
+    Given I exist as a user with transmitter role
       And I am not logged in
     When I sign in with a wrong password
     Then I see an invalid login message
       And I should be signed out
 
   Scenario: User signs in successfully with email
-    Given I exist as a user
+    Given I exist as a user with transmitter role
       And I am not logged in
     When I sign in with valid credentials
     Then I see a successful sign in message
@@ -25,7 +25,7 @@ Feature: Authentication
     Then I should be signed in
 
   Scenario: User signs out
-    Given I am logged in
+    Given I am logged in as transmitter
     When I sign out
     Then I should see a signed out message
     When I return to the site
