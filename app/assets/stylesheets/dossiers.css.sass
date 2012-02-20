@@ -2,11 +2,38 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body.dossiers
-  .control-group.inline-inputs .controls label
-    display: inline-block
+$label_width: 160px
+$label_gap: 20px
+$controls_margin: $label_width + $label_gap
 
-  form
+body.dossiers
+  .form-horizontal
+    .help-inline
+      color: #999
+    .control-group
+      margin-bottom: 9px
+    .control-group > label
+      width: $label_width
     label
       &:after
-        content: " :"
+        content: ":"
+  .controls
+    margin-left: $controls_margin
+  label.radio.inline, label.mycheckbox
+    &:after
+      content: ""
+  .control-group.inline-inputs
+    .controls
+      label
+        margin-left: 10px
+        display: inline-block
+      label.mycheckbox
+        margin-left: 3px
+      span
+        margin-right: 10px
+        input
+          margin-left: 0
+        label
+          margin-left: 5px
+          &:after
+            content: ""

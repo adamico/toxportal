@@ -1,14 +1,117 @@
 = simple_form_for dossier, :html => {class: 'form-horizontal'} do |f|
   = f.error_notification if f.error_notification
 
-  .control-group.inline-inputs
-    = f.label :code
-    .controls
-      = f.text_field :code
-      = f.label :departement_id
-      = f.collection_select :departement_id, Departement.all, :id, :cp_name
-  = f.input :date_deces, input_html: {class: "dateITA", "data-value" => date_deces}
+  .tabbable
+    %ul.nav.nav-tabs
+      %li.active= link_to "Patient", "#patient", "data-toggle" => "tab"
+      %li= link_to "Antécédents", "#antecedents", "data-toggle" => "tab"
+      %li= link_to "Substances", "#substances", "data-toggle" => "tab"
+      %li= link_to "Dosages", "#dosages", "data-toggle" => "tab"
+      %li= link_to "Examen post-mortem", "#pathologies", "data-toggle" => "tab"
+      %li= link_to "Conclusion", "#conclusion", "data-toggle" => "tab"
+    .tab-content
+      .tab-pane.active#patient
+        .control-group.inline-inputs
+          = f.label :code
+          .controls
+            = f.text_field :code
+            = f.label :departement_id
+            = f.collection_select :departement_id, Departement.all, :id, :cp_name
+        = f.input :date_deces, input_html: {class: "dateITA span2", "data-value" => date_deces}
+        .control-group.inline-inputs
+          = f.label :age, "Age réel (ans)"
+          .controls
+            = f.text_field :age, class: "span1"
+            = f.label :sexe
+            = f.collection_select :sexe, Dossier::SEXE, :first, :last, {}, class: "span1"
+            = f.label :bmi, "BMI"
+            = f.collection_radio_buttons :bmi, Dossier::BMI, :last, :first
+            = f.label :taille
+            = f.text_field :taille, class: "span1"
+        .control-group.inline-inputs
+          = f.label :decouverte_corps, "Découverte du corps"
+          .controls
+            = f.collection_radio_buttons :decouverte_corps, Dossier::DECOUVERTECORPS, :last, :first
+            = f.label :decouverte_corps_autre, "Préciser"
+            = f.text_field :decouverte_corps_autre
+        .control-group.inline-inputs
+          = f.label :intervention_medicale, "Intervention médicale"
+          .controls
+            = f.collection_radio_buttons :intervention_medicale, Dossier::NONOUI, :last, :first
+            = f.label :intervention_medicale_autre, "Préciser (secours publiques, SAMU, SMUR, etc.)"
+            = f.text_field :intervention_medicale_autre
+        = f.input :hospitalisation, wrapper: :inline_hint, as: :radio_buttons, collection: Dossier::NONOUI, item_wrapper_class: "inline", hint: "Si 'Oui', y aurait-il possibilité de transmettre copie anonymisées du CRH ?"
+        .control-group.inline-inputs
+          = f.label :profession, "Activité professionnelle"
+          .controls
+            = f.collection_radio_buttons :profession, [["Inconnue", 0], ["Connue", 1]], :last, :first
+            = f.label :profession_libelle, "Préciser"
+            = f.text_field :profession_libelle
+        .control-group.inline-inputs
+          = f.label :situation_familiale
+          .controls
+            = f.collection_radio_buttons :situation_familiale, [["Inconnue", 0], ["Seul", 1], ["Entouré", 2]], :last, :first
+      .tab-pane#antecedents
+        .control-group.inline-inputs
+          = f.label :antecedents, "Antécédents médicaux, sérologiques, chirurgicaux"
+          .controls
+            = f.collection_radio_buttons :antecedents, [["Inconnus", 0], ["Aucun", 1], ["Connus", 2]], :last, :first
+            = f.label :antecedents_details, "Préciser"
+            = f.text_area :antecedents_details, class: "span6", rows: 3
+        = f.input :antecedents_psy, label: "Antécédents psy.", as: :radio_buttons, wrapper: :inline_hint, collection: [["Non précisé", 0], ["Absent", 1], ["Oui", 2]], item_wrapper_class: "inline", hint: "si 'Oui', remplir les champs ci-dessous"
+        .control-group.inline-inputs
+          .controls
+            = f.check_box :antecedents_psy_suivi
+            = f.label :antecedents_psy_suivi, "Suivi psychiatrique au moment du décès", class: "mycheckbox"
+        .control-group.inline-inputs
+          .controls
+            = f.check_box :antecedents_psy_dep
+            = f.label :antecedents_psy_dep, "Dépression", class: "mycheckbox"
+        .control-group.inline-inputs
+          .controls
+            = f.check_box :antecedents_psy_psychose
+            = f.label :antecedents_psy_psychose, "Psychose", class: "mycheckbox"
+        .control-group.inline-inputs
+          .controls
+            = f.check_box :antecedents_psy_ts
+            = f.label :antecedents_psy_ts, "Tentatives de suicides", class: "mycheckbox"
+            = f.label :antecedents_psy_ts_mode, "Si 'Oui', préciser le mode"
+            = f.text_field :antecedents_psy_ts_mode
 
+      .tab-pane#substances
+        .control-group.inline-inputs
+          = f.label :traitement, "Traitement en cours"
+          .controls
+            = f.collection_radio_buttons :traitement, Dossier::NPNONOUI, :last, :first
+            = f.label :traitement_details, "Préciser"
+            = f.text_area :traitement_details, class: "span5", rows: 3
+        .control-group.inline-inputs
+          = f.label :substances_proximite, "Substances retrouvées à proximité du corps"
+          .controls
+            = f.collection_radio_buttons :substances_proximite, Dossier::NPNONOUI, :last, :first
+            = f.label :substances_proximite_details, "Préciser"
+            = f.text_area :substances_proximite_details, class: "span5", rows: 3
+        = f.input :dependance, as: :radio_buttons, collection: Dossier::NPNONOUI, wrapper: :inline_hint, item_wrapper_class: "inline", hint: "si 'Oui', remplir les champs ci-dessous"
+
+        - %w(alcool tabac opiaces cannabis).each do |dep|
+          .control-group.inline-inputs
+            .controls
+              = f.check_box "dependance_#{dep}"
+              = f.label "dependance_#{dep}", dep.upcase, class: "mycheckbox"
+              = f.label "sevrage_#{dep}", "Sevrage"
+              = f.collection_radio_buttons "sevrage_#{dep}", Dossier::SEVRAGE, :last, :first
+        .control-group.inline-inputs
+          .controls
+            = f.check_box :dependance_autre
+            = f.label :dependance_autre, "Autre :", class: "mycheckbox"
+            = f.text_field :dependance_autre_libelle, class: "span2"
+            = f.label :sevrage_autre, "Sevrage"
+            = f.collection_radio_buttons :sevrage_autre, Dossier::SEVRAGE, :last, :first
+
+
+      .tab-pane#dosages
+      .tab-pane#pathologies
+      .tab-pane#conclusion
   .actions
     = f.button :submit, class: "btn-success", disable_with: "Enregistrer"
     = link_to "Revenir à la liste", dossiers_path, class: 'btn btn-danger'
