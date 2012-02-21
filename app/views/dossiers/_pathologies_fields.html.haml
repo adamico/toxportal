@@ -1,0 +1,12 @@
+= f.input :examen_medico_legal, label: "Examen réalisé", as: :radio_buttons, collection: [["Autopsie", 0], ["Examen de corps"]], item_wrapper_class: "inline"
+= f.input :examen_medico_legal_description, label: "Description", as: :text, input_html: {class: "span8", rows: 2}
+= f.fields_for :examen_macroscopique do |ex_macro_form|
+  .control-group
+    = label_tag "Examen macroscopique"
+  - %w(cerebrale cardiaque pulmonaire hepatique renale autre).each do |examen|
+    .control-group.inline-inputs
+      .controls
+        = ex_macro_form.check_box examen
+        = ex_macro_form.label examen, "#{examen.upcase}(S)", class: "mycheckbox fixed"
+        = ex_macro_form.label "#{examen}_resultat", "préciser"
+        = ex_macro_form.text_field "#{examen}_resultat", class: "span6"

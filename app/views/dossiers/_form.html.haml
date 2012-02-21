@@ -14,7 +14,7 @@
       .tab-pane#antecedents= render 'antecedents_fields', f: f
       .tab-pane#substances= render 'substances_fields', f: f
       .tab-pane#dosages= render 'dosages_fields', f: f
-      .tab-pane#pathologies
+      .tab-pane#pathologies= render 'pathologies_fields', f: f
       .tab-pane#conclusion
   .actions
     = f.button :submit, class: "btn-success", disable_with: "Enregistrer"

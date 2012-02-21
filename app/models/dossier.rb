@@ -42,6 +42,8 @@ class Dossier
   field :analyses,                      type: Array
   field :analyses_autres,               type: Boolean
   field :analyses_autres_libelle,       type: String
+  field :examen_medico_legal,           type: Integer
+  field :examen_medico_legal_description, type: String
 
   ## Constants
   SEXE = ["M", "F"]
@@ -61,6 +63,7 @@ class Dossier
   ## relations
   belongs_to :departement
   has_many :dosages, dependent: :destroy, autosave: true
+  embeds_one :examen_macroscopique
   accepts_nested_attributes_for :dosages, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 end
