@@ -3,7 +3,11 @@ Toxportal::Application.routes.draw do
   root :to => "home#index"
 
   devise_for :users
-  resources :dossiers
+  resources :dossiers do
+    get :autocomplete_substance_name, on: :collection
+    get :autocomplete_matrice_name, on: :collection
+    get :autocomplete_technique_name, on: :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

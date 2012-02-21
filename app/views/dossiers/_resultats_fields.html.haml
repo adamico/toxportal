@@ -1,7 +1,7 @@
 = f.fields_for :dosages do |dosage_form|
   %tr
-    %td= dosage_form.collection_select :substance_id, Substance.all, :id, :name, include_blank: true
-    %td= dosage_form.collection_select :matrice_id, Matrice.all, :id, :name, include_blank: true
-    %td= dosage_form.text_field :concentration
+    %td= dosage_form.autocomplete_field :substance_name, autocomplete_substance_name_dossiers_path
+    %td= dosage_form.autocomplete_field :matrice_name, autocomplete_matrice_name_dossiers_path
+    %td= dosage_form.text_field :concentration, class: "span2"
     %td.reference &nbsp;
-    %td= dosage_form.collection_select :technique_id, Technique.all, :id, :name, include_blank: true
+    %td= dosage_form.autocomplete_field :technique_name, autocomplete_technique_name_dossiers_path

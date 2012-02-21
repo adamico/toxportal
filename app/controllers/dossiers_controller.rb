@@ -1,5 +1,8 @@
 class DossiersController < ApplicationController
   helper_method :date_deces
+  autocomplete :substance, :name, full: true
+  autocomplete :matrice, :name, full: true
+  autocomplete :technique, :name, full: true
 
   def index
     @dossiers = DossierDecorator.decorate(Dossier.all)
@@ -26,10 +29,9 @@ class DossiersController < ApplicationController
 
   def edit
     @dossier = Dossier.find(params[:id])
-    unless @dossier.dosages.any?
-      11.times do
-        @dossier.dosages.build
-      end
+    dosages_count = @dossier.dosages.count
+    (11 - dosages_count).times do
+      @dossier.dosages.build
     end
   end
 

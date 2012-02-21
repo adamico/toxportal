@@ -56,11 +56,11 @@ class Dossier
   validates_uniqueness_of :code
 
   ## Mass assignment protection
-  attr_accessible :code, :date_deces, :departement_id, :age, :sexe, :taille, :decouverte_corps_autre, :intervention_medicale_autre, :profession_libelle, :antecedents_details, :antecedents_psy_suivi, :antecedents_psy_dep, :antecedents_psy_psychose, :antecedents_psy_ts, :antecedents_psy_ts_mode, :traitement_details, :substances_proximite_details, :dependance_alcool, :dependance_tabac, :depependance_opiaces, :dependance_cannabis, :dependance_autre, :dependance_autre_libelle, :toxicologue, :prelevements, :analyses, :prelevements_autres, :prelevements_autres_libelle, :analyses_autres, :analyses_autres_libelle
+  attr_accessible :code, :date_deces, :departement_id, :age, :sexe, :taille, :decouverte_corps_autre, :intervention_medicale_autre, :profession_libelle, :antecedents_details, :antecedents_psy_suivi, :antecedents_psy_dep, :antecedents_psy_psychose, :antecedents_psy_ts, :antecedents_psy_ts_mode, :traitement_details, :substances_proximite_details, :dependance_alcool, :dependance_tabac, :dependance_opiaces, :dependance_cannabis, :dependance_autre, :dependance_autre_libelle, :toxicologue, :prelevements, :analyses, :prelevements_autres, :prelevements_autres_libelle, :analyses_autres, :analyses_autres_libelle, :dosages_attributes
 
   ## relations
   belongs_to :departement
-  has_many :dosages, dependent: :destroy
+  has_many :dosages, dependent: :destroy, autosave: true
   accepts_nested_attributes_for :dosages, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 end
