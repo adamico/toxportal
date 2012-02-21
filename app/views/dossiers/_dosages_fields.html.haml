@@ -1,0 +1,25 @@
+= f.input :toxicologue, label: "Nom du toxicologue"
+- %w(prelevements analyses).each do |assoc|
+  - assoc_label = "Matrice " + (assoc == "prelevements" ? "prélevée(s)" : "analysée(s)")
+  .control-group.inline-inputs
+    = f.label assoc, assoc_label
+    .controls
+      - Matrice.all.each do |matrice|
+        = hidden_field_tag "dossier[#{assoc}][]", nil
+        = check_box_tag "dossier[#{assoc}][]", matrice.id, (@dossier.send(assoc).include?(matrice.id.to_s) rescue false)
+        = matrice.name
+      %br/
+      = f.check_box "#{assoc}_autres"
+      = f.label "#{assoc}_autres", "Autres (préciser):", class: "mycheckbox"
+      = f.text_field "#{assoc}_autres_libelle"
+%h4 Résultats :
+%table.table.table-condensed.table-striped
+  %thead
+    %tr
+      %th Substance identifiée
+      %th Milieu biologique
+      %th Concentration
+      %th Référence
+      %th Technique
+  %tbody
+    = render "resultats_fields", f: f

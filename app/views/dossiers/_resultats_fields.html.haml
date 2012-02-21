@@ -1,0 +1,7 @@
+= f.fields_for :dosages do |dosage_form|
+  %tr
+    %td= dosage_form.collection_select :substance_id, Substance.all, :id, :name, include_blank: true
+    %td= dosage_form.collection_select :matrice_id, Matrice.all, :id, :name, include_blank: true
+    %td= dosage_form.text_field :concentration
+    %td.reference &nbsp;
+    %td= dosage_form.collection_select :technique_id, Technique.all, :id, :name, include_blank: true

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -17,4 +18,10 @@ puts "creating departements"
 CSV.foreach("csv/departements.csv", headers: true) do |row|
   dep = Departement.find_or_create_by(name: row['name'], code_postal: row['cp'])
   puts "new departement created : " << dep.name
+end
+
+puts "creating matrices biologiques"
+["Sang périphérique", "Sang cardiaque", "Urines", "Bile", "Humeur vitrée", "Cheveux"].each do |matrice|
+  record = Matrice.find_or_create_by(name: matrice)
+  puts "new matrice created : " << record.name
 end

@@ -1,0 +1,25 @@
+.control-group.inline-inputs
+  = f.label :antecedents, "Antécédents médicaux, sérologiques, chirurgicaux"
+  .controls
+    = f.collection_radio_buttons :antecedents, [["Inconnus", 0], ["Aucun", 1], ["Connus", 2]], :last, :first
+    = f.label :antecedents_details, "Préciser"
+    = f.text_area :antecedents_details, class: "span6", rows: 3
+= f.input :antecedents_psy, label: "Antécédents psy.", as: :radio_buttons, wrapper: :inline_hint, collection: [["Non précisé", 0], ["Absent", 1], ["Oui", 2]], item_wrapper_class: "inline", hint: "si 'Oui', remplir les champs ci-dessous"
+.control-group.inline-inputs
+  .controls
+    = f.check_box :antecedents_psy_suivi
+    = f.label :antecedents_psy_suivi, "Suivi psychiatrique au moment du décès", class: "mycheckbox"
+.control-group.inline-inputs
+  .controls
+    = f.check_box :antecedents_psy_dep
+    = f.label :antecedents_psy_dep, "Dépression", class: "mycheckbox"
+.control-group.inline-inputs
+  .controls
+    = f.check_box :antecedents_psy_psychose
+    = f.label :antecedents_psy_psychose, "Psychose", class: "mycheckbox"
+.control-group.inline-inputs
+  .controls
+    = f.check_box :antecedents_psy_ts
+    = f.label :antecedents_psy_ts, "Tentatives de suicides", class: "mycheckbox"
+    = f.label :antecedents_psy_ts_mode, "Si 'Oui', préciser le mode"
+    = f.text_field :antecedents_psy_ts_mode

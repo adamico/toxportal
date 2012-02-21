@@ -1,0 +1,40 @@
+.control-group.inline-inputs
+  = f.label :code
+  .controls
+    = f.text_field :code
+    = f.label :departement_id
+    = f.collection_select :departement_id, Departement.all, :id, :cp_name
+= f.input :date_deces, input_html: {class: "dateITA span2", "data-value" => date_deces}
+.control-group.inline-inputs
+  = f.label :age, "Age réel (ans)"
+  .controls
+    = f.text_field :age, class: "span1"
+    = f.label :sexe
+    = f.collection_select :sexe, Dossier::SEXE, :first, :last, {}, class: "span1"
+    = f.label :bmi, "BMI"
+    = f.collection_radio_buttons :bmi, Dossier::BMI, :last, :first
+    = f.label :taille
+    = f.text_field :taille, class: "span1"
+.control-group.inline-inputs
+  = f.label :decouverte_corps, "Découverte du corps"
+  .controls
+    = f.collection_radio_buttons :decouverte_corps, Dossier::DECOUVERTECORPS, :last, :first
+    = f.label :decouverte_corps_autre, "Préciser"
+    = f.text_field :decouverte_corps_autre
+.control-group.inline-inputs
+  = f.label :intervention_medicale, "Intervention médicale"
+  .controls
+    = f.collection_radio_buttons :intervention_medicale, Dossier::NONOUI, :last, :first
+    = f.label :intervention_medicale_autre, "Préciser (secours publiques, SAMU, SMUR, etc.)"
+    = f.text_field :intervention_medicale_autre
+= f.input :hospitalisation, wrapper: :inline_hint, as: :radio_buttons, collection: Dossier::NONOUI, item_wrapper_class: "inline", hint: "Si 'Oui', y aurait-il possibilité de transmettre copie anonymisées du CRH ?"
+.control-group.inline-inputs
+  = f.label :profession, "Activité professionnelle"
+  .controls
+    = f.collection_radio_buttons :profession, [["Inconnue", 0], ["Connue", 1]], :last, :first
+    = f.label :profession_libelle, "Préciser"
+    = f.text_field :profession_libelle
+.control-group.inline-inputs
+  = f.label :situation_familiale
+  .controls
+    = f.collection_radio_buttons :situation_familiale, [["Inconnue", 0], ["Seul", 1], ["Entouré", 2]], :last, :first

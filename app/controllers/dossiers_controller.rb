@@ -7,6 +7,9 @@ class DossiersController < ApplicationController
 
   def new
     @dossier = Dossier.new
+    11.times do
+      @dossier.dosages.build
+    end
   end
 
   def create
@@ -23,6 +26,11 @@ class DossiersController < ApplicationController
 
   def edit
     @dossier = Dossier.find(params[:id])
+    unless @dossier.dosages.any?
+      11.times do
+        @dossier.dosages.build
+      end
+    end
   end
 
   def update
