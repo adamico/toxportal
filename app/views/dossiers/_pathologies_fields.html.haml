@@ -10,3 +10,5 @@
         = ex_macro_form.label examen, "#{examen.upcase}(S)", class: "mycheckbox fixed"
         = ex_macro_form.label "#{examen}_resultat", "préciser"
         = ex_macro_form.text_field "#{examen}_resultat", class: "span6"
+= f.input :examen_histologique, as: :radio_buttons, collection: [["Non réalisé", 0], ["Réalisé", 1]], item_wrapper_class: "inline"
+= f.input :examen_histologique_resultat, as: :text, label: "Résultats", input_html: {class: "span8", rows: 2}
