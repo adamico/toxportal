@@ -28,15 +28,15 @@ class DossiersController < ApplicationController
   end
 
   def edit
-    @dossier = Dossier.find(params[:id])
-    dosages_count = @dossier.dosages.count
+    @dossier = Dossier.find_by_slug(params[:id])
+    dosages_count = @dossier.dosages.count rescue 0
     (11 - dosages_count).times do
       @dossier.dosages.build
     end
   end
 
   def update
-    @dossier = Dossier.find(params[:id])
+    @dossier = Dossier.find_by_slug(params[:id])
     if @dossier.update_attributes(params[:dossier])
       redirect_with_flash(@dossier, dossiers_path)
     else

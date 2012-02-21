@@ -128,6 +128,9 @@ GEM
     mongoid-rspec (1.4.4)
       mongoid (~> 2.0)
       rspec (~> 2)
+    mongoid_slug (0.9.0)
+      mongoid (~> 2.0)
+      stringex (~> 1.3)
     multi_json (1.0.4)
     nokogiri (1.5.0)
     orm_adapter (0.0.6)
@@ -195,6 +198,7 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    stringex (1.3.2)
     term-ansicolor (1.0.7)
     thin (1.3.1)
       daemons (>= 1.0.9)
@@ -234,6 +238,7 @@ DEPENDENCIES
   launchy (>= 2.0.5)
   mongoid (>= 2.4.3)
   mongoid-rspec (>= 1.4.4)
+  mongoid_slug
   pry
   rails (= 3.2.1)
   rails3-jquery-autocomplete

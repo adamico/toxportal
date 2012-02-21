@@ -2,6 +2,7 @@
 class Dossier
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
 
   ## Fields
   field :code,                          type: String, null: false
@@ -72,4 +73,6 @@ class Dossier
   embeds_one :examen_macroscopique
   accepts_nested_attributes_for :dosages, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+
+  slug :code
 end

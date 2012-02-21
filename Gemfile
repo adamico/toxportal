@@ -34,3 +34,4 @@ gem "thin"
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'draper'
 gem 'rails3-jquery-autocomplete'
+gem 'mongoid_slug'
