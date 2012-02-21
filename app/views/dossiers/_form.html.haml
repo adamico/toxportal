@@ -16,6 +16,9 @@
       .tab-pane#dosages= render 'dosages_fields', f: f
       .tab-pane#pathologies= render 'pathologies_fields', f: f
       .tab-pane#conclusion
+        = f.input :deces_type, as: :radio_buttons, label: "Type de décès", collection: [["Inconnu", 0], ["Homicide", 1], ["Accidentel", 2], ["Suicidaire", 3]], item_wrapper_class: "inline"
+        = f.input :deces_mecanisme, as: :radio_buttons, label: "Mécanisme du décès", collection: [["Directement toxique", 0], ["Indirectement toxique", 1], ["Décompensation toxique d'une pathologie médicamenteuse", 2], ["Non toxique", 3]], item_wrapper_class: "inline"
+        = f.input :conclusion, as: :text, label: "Conclusion générale", input_html: {class: "span8", rows: 10}
   .actions
     = f.button :submit, class: "btn-success", disable_with: "Enregistrer"
     = link_to "Revenir à la liste", dossiers_path, class: 'btn btn-danger'
