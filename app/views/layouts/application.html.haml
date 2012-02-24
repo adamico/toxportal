@@ -22,6 +22,7 @@
           = link_to "ToxPortal", root_path, class: "brand"
           - if user_signed_in?
             %ul.nav
+              %li= link_to "Administration", administration_dashboard_path, target: "_blank"
               %li= link_to "Saisie", new_dossier_path
             %ul.nav.pull-right
               %li= link_to t("devise.shared.sign_out"), destroy_user_session_path, :method=>'delete'
