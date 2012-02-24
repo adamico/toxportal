@@ -1,4 +1,6 @@
 class DossiersController < ApplicationController
+  before_filter :authenticate_user!
+
   helper_method :date_deces
   autocomplete :substance, :name, full: true
   autocomplete :matrice, :name, full: true

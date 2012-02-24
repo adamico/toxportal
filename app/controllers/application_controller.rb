@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
-
   protect_from_forgery
 
   def redirect_with_flash(resource, path=nil, message=nil)
