@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  include ActiveAdmin::MongoMapper::Patches
+  include ActiveAdmin::Mongoid::Patches
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -42,10 +42,10 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  field :name
+  field :name, type: "String"
 
   ## Other fields
-  field :role
+  field :role, type: "String"
 
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false

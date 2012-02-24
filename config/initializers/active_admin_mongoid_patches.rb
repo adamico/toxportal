@@ -5,6 +5,17 @@ require "active_admin/resource_controller"
 require 'ostruct'
 
 module ActiveAdmin
+  module Views
+    module Pages
+      class Index < Base
+        protected
+        # https://github.com/gregbell/active_admin/commit/bf341ba505e76ac6ab8d083ffb0b821e6d8ae1f8
+        def items_in_collection?
+          collection.any?
+        end
+      end
+    end
+  end
   class Namespace
     # Disable comments
     def comments?
@@ -26,9 +37,9 @@ module ActiveAdmin
     # Use #desc and #asc for sorting.
     def sort_order(chain)
       params[:order] ||= active_admin_config.sort_order
-      # table_name = active_admin_config.resource_table_name
+      table_name = active_admin_config.resource_table_name
       if params[:order] && params[:order] =~ /^([\w\_\.]+)_(desc|asc)$/
-        chain.send(:sort, $1.to_sym.send($2))
+        chain.send($2, $1)
       else
         chain # just return the chain
       end
@@ -40,32 +51,28 @@ module ActiveAdmin
     end
   end
 
-  module MongoMapper
-    COLUMN_TYPES = { Bignum => :integer, Array => :string, Symbol => :string }
+  module Mongoid
+    COLUMN_TYPES = { Bignum => :integer, Array => :string}
 
     module Patches
       def self.included(base)
-        raise 'Include ActiveAdmin::MongoMapper::Patches after MongoMapper::Document' unless base.respond_to?(:collection_name)
+        raise 'Include ActiveAdmin::Mongoid::Patches after Mongoid::Document' unless base.respond_to?(:collection_name)
         base.extend ClassPatches
       end
 
       def column_for_attribute(attr)
-        field = self.class.keys.values.detect { |c| c.name == attr.to_s }
-        OpenStruct.new.tap do |c|
-          c.name = field.name
-          c.type = ActiveAdmin::MongoMapper::COLUMN_TYPES[field.type] || field.type.to_s.downcase.to_sym
-        end if field and field.type
+        self.class.columns.detect { |c| c.name == attr.to_s}
       end
 
       module ClassPatches
         HIDDEN_COLUMNS = %w(_id _type)
 
         def content_columns
-          keys.map do |name, field|
+          fields.map do |name, field|
             next if HIDDEN_COLUMNS.include?(name)
             OpenStruct.new.tap do |c|
               c.name = field.name
-              c.type = ActiveAdmin::MongoMapper::COLUMN_TYPES[field.type] || field.type.to_s.downcase.to_sym
+              c.type = ActiveAdmin::Mongoid::COLUMN_TYPES[field.type] || field.type.to_s.downcase.to_sym
             end
           end.compact
         end
