@@ -1,4 +1,43 @@
+# encoding: UTF-8
 ActiveAdmin::Dashboards.build do
+
+
+  %w(matrice substance technique).each do |name|
+    klass = name.classify.constantize
+    section "#{name.titleize.pluralize}" do
+      ul do
+        klass.limit(5).collect do |instance|
+          li link_to(instance.name, edit_polymorphic_path([:administration, instance]))
+        end
+      end
+      strong { link_to "Voir la liste complète", polymorphic_path([:administration, klass])}
+    end
+  end
+
+  #section "Matrices crées récemment" do
+    #ul do
+      #Matrice.limit(5).collect do |matrice|
+        #li link_to(matrice.name, edit_administration_matrice_path(matrice))
+      #end
+    #end
+    #strong { link_to "Voir la liste complète", administration_matrices_path}
+  #end
+
+  #section "Techniques crées récemment" do
+    #ul do
+      #Technique.limit(5).collect do |technique|
+        #li link_to(technique.name, edit_administration_technique_path(technique))
+      #end
+    #end
+  #end
+
+  #section "Substances crées récemment" do
+    #ul do
+      #Substance.limit(5).collect do |substance|
+        #li link_to(substance.name, edit_administration_substance_path(substance))
+      #end
+    #end
+  #end
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just

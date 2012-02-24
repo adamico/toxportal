@@ -8,8 +8,8 @@ fr:
     edit: "Modifier"
     delete: "Supprimer"
     delete_confirmation: "Êtes-vous certain de vouloir supprimer ceci ?"
-    new_model: "Nouveau %{model}"
-    create_model: "Nouveau %{model}"
+    new_model: "Création %{model}"
+    create_model: "Création %{model}"
     edit_model: "Modifier %{model}"
     update_model: "Modifier %{model}"
     delete_model: "Supprimer %{model}"
@@ -19,7 +19,7 @@ fr:
     previous: "Précédent"
     next: "Suivant"
     download: "Télécharger:"
-    has_many_new: "Ajouter un nouveau %{model}"
+    has_many_new: "Ajouter %{model}"
     has_many_delete: "Supprimer"
     filter: "Filtrer"
     clear_filters: "Supprimer les filtres"
@@ -32,9 +32,9 @@ fr:
     sidebars:
       filters: "Filtres"
     pagination:
-      empty: "Aucun %{model} trouvé"
+      empty: "Aucun(e) %{model} trouvé(e)"
       one: "Affichage de <b>1</b> %{model}"
-      one_page: "Affichage de <b>tous les %{n}</b> %{model}"
+      one_page: "Affichage de <b>tou(te)s les %{n}</b> %{model}"
       multiple: "Affichage de %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> sur un total de <b>%{total}</b>"
       entry:
         one: "entrée"
@@ -43,7 +43,7 @@ fr:
     blank_slate:
       content: "Il n'y a pas encore de %{resource_name}."
       link: "Créez en un"
-    comments:    
+    comments:
       body: "Corps"
       author: "Auteur"
       title: "Commentaire"
