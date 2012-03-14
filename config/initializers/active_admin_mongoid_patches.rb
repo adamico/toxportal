@@ -5,17 +5,6 @@ require "active_admin/resource_controller"
 require 'ostruct'
 
 module ActiveAdmin
-  module Views
-    module Pages
-      class Index < Base
-        protected
-        # https://github.com/gregbell/active_admin/commit/bf341ba505e76ac6ab8d083ffb0b821e6d8ae1f8
-        def items_in_collection?
-          collection.any?
-        end
-      end
-    end
-  end
   class Namespace
     # Disable comments
     def comments?
@@ -25,7 +14,7 @@ module ActiveAdmin
 
   class Resource
     def resource_table_name
-      resource.collection.name
+      controller.resources_configuration[:self][:route_instance_name]
     end
 
     # Disable filters
@@ -33,7 +22,7 @@ module ActiveAdmin
     end
   end
 
-  class ResourceController < BaseController
+  class ResourceController
     # Use #desc and #asc for sorting.
     def sort_order(chain)
       params[:order] ||= active_admin_config.sort_order
@@ -48,6 +37,18 @@ module ActiveAdmin
     # Disable filters
     def search(chain)
       chain
+    end
+  end
+
+  module Views
+    module Pages
+      class Index
+        protected
+        # https://github.com/gregbell/active_admin/commit/bf341ba505e76ac6ab8d083ffb0b821e6d8ae1f8
+        def items_in_collection?
+          collection.limit(1).exists?
+        end
+      end
     end
   end
 
