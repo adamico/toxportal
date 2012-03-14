@@ -6,6 +6,5 @@ class Substance
   field :name, :type => String
 
   has_many :dosages
-  
   slug :name
 end
