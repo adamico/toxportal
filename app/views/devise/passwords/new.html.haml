@@ -1,9 +1,7 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+- title t('devise.shared.forgot_password')
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, class: "well form-inline" }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div= f.submit "Send me reset password instructions"
+  = f.label :email
+  = f.email_field :email
+  = f.submit t("devise.passwords.send_reset_password_instructions"), class: "btn btn-primary"
 = render "links"
