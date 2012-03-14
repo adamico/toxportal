@@ -181,6 +181,7 @@ fr:
   attributes:
     created_at: "Créé le"
     updated_at: "Modifié le"
+    name: "libéllé"
 
   errors:
     format: "Le %{attribute} %{message}"
@@ -209,43 +210,3 @@ fr:
         one:   "Impossible d'enregistrer ce(tte) %{model} : 1 erreur"
         other: "Impossible d'enregistrer ce(tte) %{model} : %{count} erreurs"
       body: "Veuillez vérifier les champs suivants : "
-
-  activerecord:
-    errors:
-      messages:
-        taken: "n'est pas disponible"
-        record_invalid: "La validation a échoué : %{errors}"
-        <<: *errors_messages
-      template:
-        <<: *errors_template
-      full_messages:
-        format: "%{attribute} %{message}"
-    models: &models
-      user: Utilisateur
-      activite: Activité
-      atc: Classe ATC
-      classedeffet: Classe Effet
-      hopital: Hôpital
-      medicament: Médicament
-      qualite: Qualité
-      recueil: Mode de Recueil
-      type_dossier: Type de Dossier
-      responsable: "Prise en charge"
-      appel: Appel
-    attributes:
-      appel:
-        dateappel: "Date appel"
-        numeroappel: "N° appel"
-        nom: "Nom patient"
-        departement: "Département"
-        numerodossier: "N° de dossier"
-        datesaisie: "Date saisie BNPV"
-        temps: "Temps passé"
-        nbcourrier: "N de courriers"
-        interet: "Intérêt"
-        gravite: "Gravité"
-        nouveaute: "Nouveauté"
-        evitabilite: "Evitabilité"
-        enquete: "Enquête"
-        medicaments: "Médicaments"
-        <<: *models
