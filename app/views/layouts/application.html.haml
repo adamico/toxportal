@@ -25,16 +25,18 @@
               %li= link_to "Administration", administration_dashboard_path, target: "_blank"
               %li= link_to "Saisie", new_dossier_path
             %ul.nav.pull-right
-              %li= link_to t("devise.shared.sign_out"), destroy_user_session_path, :method=>'delete'
+              %li
+                = link_to destroy_user_session_path do
+                  %span.label.label-important= t("devise.shared.sign_out")
     .container
       .content
         .page-header
-          - flash && flash.each do |name, msg|
-            .alert.fade.in{:class => "alert-#{name}"}
-              %a.close{"data-dismiss" => "alert"} &times;
-              = msg
           %h1#page_title
             = yield(:title) if show_title?
             = yield(:page_title)
+          - flash && flash.each do |name, msg|
+            .alert.fade.in{:class => "alert-#{name}"}
+              %a.close{"data-dismiss" => "alert"} &times;
+              %strong= msg
         = yield
     %footer
