@@ -7,6 +7,10 @@ Toxportal::Application.routes.draw do
   root :to => "dossiers#index"
 
   devise_for :users
+  as :user do
+    get "/login" => "devise/sessions#new"
+    get "/logout" => "devise/sessions#destroy"
+  end
   resources :dossiers do
     get :autocomplete_substance_name, on: :collection
     get :autocomplete_matrice_name, on: :collection
