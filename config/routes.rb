@@ -12,6 +12,7 @@ Toxportal::Application.routes.draw do
     get "/logout" => "devise/sessions#destroy"
   end
   resources :dossiers do
+    resources :comments
     get :autocomplete_substance_name, on: :collection
     get :autocomplete_matrice_name, on: :collection
     get :autocomplete_technique_name, on: :collection

@@ -3,3 +3,16 @@
   %td= dossier.date_deces
   %td= dossier.departement.cp_name
   %td= link_to "Modifier", edit_dossier_path(dossier)
+  %td= dossier.link_to_add_comment
+
+%div{id: "dossier_#{dossier.id}_comments", class: "modal hide"}
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} &times;
+    %h1 Commentaires pour le dossier ##{dossier.code}
+  .modal-body
+    = render dossier.comments if dossier.comments.any?
+    = form_for [dossier, dossier.comments.build], html: {class: 'form-horizontal'} do |f|
+      = f.hidden_field :user_id, value: current_user.id
+      = f.text_area :body, class: "span8", rows: 2
+      %br/ 
+      = f.submit "Enregistrer", class: "btn-success", disable_with: "Enregistrer"

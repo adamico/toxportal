@@ -48,3 +48,22 @@ table.table-striped
   input[type=submit]
     margin-left: 10px
   right: 0
+
+.modal
+  width: 700px
+  min-height: 300px
+  margin: 0
+  position: fixed
+  top: 15%
+  left: 5%
+  .row
+    margin: 5px 0
+    margin-left: -10px
+  .modal-body
+    padding: 10px
+    .libelle
+      font-weight: bold
+      &:after
+        content: " : "
+    .right
+      text-align: right

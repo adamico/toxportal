@@ -1,6 +1,12 @@
 class DossierDecorator < ApplicationDecorator
   decorates :dossier
 
+  def link_to_add_comment
+    h.link_to "#dossier_#{dossier.id}_comments", class: "btn btn-small", "data-toggle"  => "modal" do
+      h.safe_concat "<i class='icon-plus'></i>" + "\nAjouter commentaire"
+    end
+  end
+
   def date_deces
     handle_none dossier.date_deces do
       localize_date(dossier.date_deces)

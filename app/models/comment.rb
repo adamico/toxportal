@@ -1,7 +1,14 @@
 class Comment
   include Mongoid::Document
   embedded_in :dossier
-  belongs_to :user
 
   field :body, type: String
+  field :user_id, type: String
+
+  def user
+    if user_id
+      username = User.find(user_id).name
+      "#{username}"
+    end
+  end
 end
