@@ -1,4 +1,7 @@
-.row
-  .span8
-    %span.libelle= comment.user
-    = comment.body
+= content_tag_for :div, comment do
+  %span.dateandoptions
+    %em Il y a #{time_ago_in_words(comment.created_at) if comment.created_at}
+  %span.user
+    %strong= comment.user_name
+    a écrit :
+  %span.body= comment.body

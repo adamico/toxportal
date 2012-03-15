@@ -27,6 +27,8 @@ class DossiersController < ApplicationController
   end
 
   def show
+    @dossier = Dossier.find_by_slug(params[:id])
+    @comments = @dossier.comments
   end
 
   def edit
