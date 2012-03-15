@@ -11,7 +11,3 @@ Feature: Commentaires
     When I access the dossier
     And I add a comment
     Then that comment should be visible
-
-  Scenario: Access comments list
-
-  Scenario: Modify a comment
