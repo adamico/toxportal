@@ -12,6 +12,12 @@ class DossierDecorator < ApplicationDecorator
       localize_date(dossier.date_deces)
     end
   end
+
+  def departement
+    if dossier.departement
+      dossier.departement.cp_name
+    end
+  end
   # Accessing Helpers
   #   You can access any helper via a proxy
   #
