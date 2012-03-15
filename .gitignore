@@ -70,6 +70,3 @@ db/*.sqlite3
 
 # vim artifacts
 **.swp
-
-# csv files
-/csv/
