@@ -1,7 +1,7 @@
 - title t("devise.shared.sign_in")
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: 'well form-inline'}) do |f|
-  = f.text_field :email, class: "input-small", placeholder: "Email"
-  = f.password_field :password, class: "input-small", placeholder: "Mot de passe"
+  = f.text_field :email, placeholder: "Email"
+  = f.password_field :password, placeholder: "Mot de passe"
   - if devise_mapping.rememberable?
     %label.checkbox
       = f.check_box :remember_me
