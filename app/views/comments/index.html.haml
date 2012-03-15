@@ -1,12 +1,14 @@
 - title "Dossier ##{@dossier.code}"
-%h2
-  %span#comments_count= pluralize(@comments.count, "Commentaire")
-  pour le dossier ##{@dossier.code}
+
+= content_for :page_title do
+  %small
+    %span#comments_count= pluralize(@comments.count, "Commentaire")
 
 #comments
   = render @comments if @comments.any?
 
 %h2 Rajouter un commentaire
+
 = form_for [@dossier, @dossier.comments.build], remote: true, html: {class: 'form-horizontal'} do |f|
   = f.hidden_field :user_id, value: current_user.id
   = f.text_area :body, class: "span8", rows: 2

@@ -26,11 +26,6 @@ class DossiersController < ApplicationController
     end
   end
 
-  def show
-    @dossier = Dossier.find_by_slug(params[:id])
-    @comments = @dossier.comments
-  end
-
   def edit
     @dossier = Dossier.find_by_slug(params[:id])
     dosages_count = @dossier.dosages.count rescue 0

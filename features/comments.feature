@@ -8,6 +8,6 @@ Feature: Commentaires
 
   @javascript
   Scenario: Add a comment to a dossier
-    When I access the dossier
-    And I add a comment
+    When I access the dossier list
+    And I add a comment for the dossier
     Then that comment should be visible

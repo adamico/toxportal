@@ -6,3 +6,7 @@
     = link_to dossier, class: "btn btn-primary" do
       %i.icon-eye-open.icon-white
       Voir
+  %td
+    = link_to dossier_comments_path(dossier), class: "btn btn-info" do
+      %i.icon-comment.icon-white
+      Commentaires (#{dossier.comments.count})
