@@ -1,6 +1,13 @@
 class DossierDecorator < ApplicationDecorator
   decorates :dossier
 
+  def date_saisie
+    date = dossier.updated_at ? dossier.updated_at : dossier.created_at
+    handle_none date do
+      localize_date date
+    end
+  end
+
   def date_deces
     handle_none dossier.date_deces do
       localize_date(dossier.date_deces)

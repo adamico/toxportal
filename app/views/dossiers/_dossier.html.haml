@@ -2,10 +2,11 @@
   %td= dossier.code
   %td= dossier.date_deces
   %td= dossier.departement
+  %td= dossier.date_saisie
   %td
-    = link_to dossier, class: "btn btn-primary" do
-      %i.icon-eye-open.icon-white
-      Voir
+    = link_to edit_dossier_path(dossier), class: "btn btn-primary" do
+      %i.icon-pencil.icon-white
+      Modifier
   %td
     = link_to dossier_comments_path(dossier), class: "btn btn-info" do
       %i.icon-comment.icon-white

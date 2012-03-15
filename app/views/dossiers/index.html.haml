@@ -1,3 +1,17 @@
 - title "Listing dossiers"
 
-= render 'dossiers', dossiers: @dossiers
+- if @dossiers.any?
+  %table.table.table-condensed.table-striped
+    %thead
+      %tr
+        %th Identification
+        %th Date décès
+        %th Département
+        %th Crée/Modifié
+        %th
+        %th
+    %tbody#dossiers
+      = render @dossiers
+
+- else
+  Aucun dossier
