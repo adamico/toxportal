@@ -1,12 +1,23 @@
-When /^I access the dossiers list$/ do
-  visit dossiers_path
+Then /^show me the page$/ do
+  save_and_open_page
 end
 
-When /^I add a comment to a dossier$/ do
-  click_on "Ajouter commentaire"
+Given /^an existing dossier$/ do
+  steps %{
+    When I add a new dossier
+  }
+end
+
+When /^I access the dossier$/ do
+  visit dossier_path(Dossier.first)
+end
+
+When /^I add a comment$/ do
+
   fill_in "comment_body", with: "test"
+  click_on "Enregistrer"
 end
 
 Then /^that comment should be visible$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_content("test")
 end

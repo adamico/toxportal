@@ -4,10 +4,12 @@ Feature: Commentaires
 
   Background:
     Given I am logged in as transmitter
+    And an existing dossier
 
+  @javascript
   Scenario: Add a comment to a dossier
-    When I access the dossiers list
-    And I add a comment to a dossier
+    When I access the dossier
+    And I add a comment
     Then that comment should be visible
 
   Scenario: Access comments list
